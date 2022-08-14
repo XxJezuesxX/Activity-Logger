@@ -13,23 +13,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.rowVH> {
+public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.recordVH> {
 
-    ArrayList<Record> rows;
+    ArrayList<Record> records;
     Context context;
 
-    public TimeTableAdapter(ArrayList<Record> oneCell, Context context){
-        rows = oneCell;
+    public TimeTableAdapter(ArrayList<Record> records, Context context){
+        this.records = records;
         this.context = context;
     }
 
-    public class rowVH extends RecyclerView.ViewHolder{
+    public class recordVH extends RecyclerView.ViewHolder{
 
         public TextView index;
         public EditText tasksName;
         public EditText totalHours;
 
-        public rowVH(@NonNull View itemView) {
+        public recordVH(@NonNull View itemView) {
             super(itemView);
 
             index = itemView.findViewById(R.id.index);
@@ -46,7 +46,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.rowV
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     String strTasksName = tasksName.getText().toString();
-                    rows.get(rows.size()-1).setTasksName(strTasksName);
+                    records.get(records.size()-1).setTasksName(strTasksName);
                 }
 
                 @Override
@@ -71,7 +71,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.rowV
 
                     try {
                         int intTotalHours = Integer.parseInt(totalHours.getText().toString());
-                        rows.get(rows.size() - 1).setHours(intTotalHours);
+                        records.get(records.size() - 1).setHours(intTotalHours);
                     }
                     catch(NumberFormatException nfe){
                         System.out.println(nfe);
@@ -92,9 +92,9 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.rowV
      * specific data.
      */
     @Override
-    public rowVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public recordVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.each_row, parent, false);
-        rowVH rVH = new rowVH(v);
+        recordVH rVH = new recordVH(v);
         return rVH;
     }
 
@@ -106,10 +106,10 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.rowV
      */
 
     @Override
-    public void onBindViewHolder(@NonNull rowVH holder, int position) {
-        holder.index.setText(String.valueOf(rows.get(position).getIndex()));
-        holder.tasksName.setText(String.valueOf(rows.get(position).getTasksName()));
-        holder.totalHours.setText(String.valueOf(rows.get(position).getHours()));
+    public void onBindViewHolder(@NonNull recordVH holder, int position) {
+        holder.index.setText(String.valueOf(records.get(position).getIndex()));
+        holder.tasksName.setText(String.valueOf(records.get(position).getTasksName()));
+        holder.totalHours.setText(String.valueOf(records.get(position).getHours()));
     }
 
     /**
@@ -119,7 +119,7 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.rowV
      */
     @Override
     public int getItemCount() {
-        return rows.size();
+        return records.size();
     }
 
 

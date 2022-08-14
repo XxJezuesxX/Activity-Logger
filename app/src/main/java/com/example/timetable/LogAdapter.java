@@ -17,8 +17,6 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogVH> {
     ArrayList<logsRow> logs;
     Context mContext;
 
-
-
     public LogAdapter(ArrayList<logsRow> logs, Context context) {
         this.logs = logs;
         mContext = context;
@@ -71,10 +69,5 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.LogVH> {
     public int getItemCount() {
         return logs.size();
     }
-
-
-
-
-
 
 }
